@@ -3,7 +3,6 @@
 namespace MusicBrainz\Tests;
 
 use MusicBrainz\MusicBrainz;
-use Guzzle\Http\Client;
 
 /**
  * @covers MusicBrainz\MusicBrainz
@@ -12,7 +11,7 @@ class MusicBrainzTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->brainz = new MusicBrainz(new Client());
+        $this->brainz = new MusicBrainz($this->getMock('\Guzzle\Http\ClientInterface'));
     }
 
     public function MBIDProvider()

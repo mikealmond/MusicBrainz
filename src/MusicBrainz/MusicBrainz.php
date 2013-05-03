@@ -2,7 +2,7 @@
 
 namespace MusicBrainz;
 
-use Guzzle\Http\Client;
+use Guzzle\Http\ClientInterface;
 
 /**
  * Connect to the MusicBrainz web service
@@ -273,7 +273,7 @@ class MusicBrainz
     /**
      * The Guzzle client used to make cURL requests
      *
-     * @var \Guzzle\Http\Client
+     * @var \Guzzle\Http\ClientInterface
      */
     private $client;
 
@@ -281,11 +281,11 @@ class MusicBrainz
      * Initializes the class. You can pass the user’s username and password
      * However, you can modify or add all values later.
      *
-     * @param \Guzzle\Http\Client $client   The Guzzle client used to make requests
-     * @param string              $user
-     * @param string              $password
+     * @param \Guzzle\Http\ClientInterface $client   The Guzzle client used to make requests
+     * @param string                       $user
+     * @param string                       $password
      */
-    public function __construct(Client $client, $user = null, $password = null)
+    public function __construct(ClientInterface $client, $user = null, $password = null)
     {
         $this->client = $client;
 
