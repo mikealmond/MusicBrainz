@@ -39,7 +39,7 @@ abstract class AbstractFilter
                     {
                         $params['query'] .= $key . ':' . $val;
                     } else {
-                        $params['query'] .= $key . ':' .  urlencode(preg_replace('/([\+\-\!\(\)\{\}\[\]\^\~\*\?\:\\\\])/', '/$1', $val));
+                        $params['query'] .= $key . ':' .  urlencode(preg_replace('/([\+\-\!\(\)\{\}\[\]\^\~\*\?\:\\\\])/', '\\\\$1', $val));
                     }
                 }
             }
