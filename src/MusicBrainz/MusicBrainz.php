@@ -2,7 +2,7 @@
 
 namespace MusicBrainz;
 
-use Guzzle\Http\ClientInterface;
+use MusicBrainz\Clients\MbClient;
 
 /**
  * Connect to the MusicBrainz web service
@@ -13,9 +13,6 @@ use Guzzle\Http\ClientInterface;
  */
 class MusicBrainz
 {
-
-    const URL = 'http://musicbrainz.org/ws/2';
-
     private static $validIncludes = array(
         'artist'=> array(
             "recordings",
@@ -271,9 +268,9 @@ class MusicBrainz
     private $password = null;
 
     /**
-     * The Guzzle client used to make cURL requests
+     * The client used to make requests
      *
-     * @var \Guzzle\Http\ClientInterface
+     * @var \MusicBrainz\Clients\MbClient
      */
     private $client;
 
@@ -281,11 +278,11 @@ class MusicBrainz
      * Initializes the class. You can pass the user’s username and password
      * However, you can modify or add all values later.
      *
-     * @param \Guzzle\Http\ClientInterface $client   The Guzzle client used to make requests
+     * @param \MusicBrainz\Clients\MbClient $client   The client used to make requests
      * @param string                       $user
      * @param string                       $password
      */
-    public function __construct(ClientInterface $client, $user = null, $password = null)
+    public function __construct(MbClient $client, $user = null, $password = null)
     {
         $this->client = $client;
 
@@ -325,7 +322,7 @@ class MusicBrainz
             'fmt' => 'json'
         );
 
-        $response = $this->call($entity . '/' . $mbid, $params, 'GET', $authRequired);
+        $response = $this->client->call($entity . '/' . $mbid, $params, $this->get_call_options(), $authRequired);
 
         return $response;
     }
@@ -353,7 +350,7 @@ class MusicBrainz
             'fmt'    => 'json'
         );
 
-        $response = $this->call($filter->getEntity() . '/', $params, 'GET', $authRequired);
+        $response = $this->client->call($filter->getEntity() . '/', $params, $this->get_call_options(), $authRequired);
 
         return $response;
     }
@@ -429,50 +426,22 @@ class MusicBrainz
 
         $params = $filter->createParameters(array('limit' => $limit, 'offset' => $offset, 'fmt' => 'json'));
 
-        $response = $this->call($filter->getEntity() . '/', $params);
+        $response = $this->client->call($filter->getEntity() . '/', $params, $this->get_call_options());
 
         return $filter->parseResponse($response);
 
     }
-
-    /**
-     * Perform a cUrl call based on a path and paramaters using
-     * HTTP Digest for POST and certain GET calls (user-ratings, etc)
-     * Ask for JSON to be returned instead of XML and set the user agent
-     * based on MusicBrainz::setUserAgent
-     *
-     * @param  string $path
-     * @param  array  $params
-     * @param  string $method GET|POST
-     * @return array
-     */
-    private function call($path, array $params = array(), $method = 'GET', $isAuthRequred = false)
+    
+    public function get_call_options()
     {
-
-        if ($this->userAgent == '') {
-            throw new Exception('You must set a valid User Agent before accessing the MusicBrainz API');
-        }
-
-        $this->client->setBaseUrl(self::URL);
-        $this->client->setConfig(array(
-            'data' => $params
-        ));
-
-        $request = $this->client->get($path . '{?data*}');
-        $request->setHeader('Accept', 'application/json');
-        $request->setHeader('User-Agent', $this->userAgent);
-
-        if ($isAuthRequred) {
-            if ($this->user != null && $this->password != null) {
-                $request->setAuth($this->user, $this->password, CURLAUTH_DIGEST);
-            } else {
-                throw new Exception('Authentication is required');
-            }
-        }
-
-        $request->getQuery()->useUrlEncoding(false);
-
-        return $request->send()->json();
+        $options = array();
+        
+        $options['method'] = 'GET';
+        $options['user-agent'] = $this->getUserAgent();
+        $options['user'] = $this->getUser();
+        $options['password'] = $this->getPassword();
+        
+        return $options;
     }
 
     /**
