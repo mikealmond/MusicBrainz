@@ -1,6 +1,7 @@
 <pre><?php
 
 use MusicBrainz\MusicBrainz;
+use MusicBrainz\Clients\GuzzleMbClient;
 use MusicBrainz\Filters\ArtistFilter;
 use MusicBrainz\Filters\RecordingFilter;
 use MusicBrainz\Filters\LabelFilter;
@@ -9,7 +10,7 @@ use Guzzle\Http\Client;
 require_once '../vendor/autoload.php';
 
 //Create new phpBrainz object
-$brainz = new MusicBrainz(new Client());
+$brainz = new MusicBrainz(new GuzzleMbClient(new Client()));
 $brainz->setUserAgent('ApplicationName', '0.1', 'http://example.com');
 
 $args = array(

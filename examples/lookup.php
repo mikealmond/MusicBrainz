@@ -1,12 +1,13 @@
 <pre><?php
 
 use MusicBrainz\MusicBrainz;
+use MusicBrainz\Clients\GuzzleMbClient;
 use Guzzle\Http\Client;
 
 require_once '../vendor/autoload.php';
 
 //Create new phpBrainz object
-$brainz = new MusicBrainz(new Client(), 'username', 'password');
+$brainz = new MusicBrainz(new GuzzleMbClient(new Client()), 'username', 'password');
 $brainz->setUserAgent('ApplicationName', '0.1', 'http://example.com');
 
 $includes = array(
