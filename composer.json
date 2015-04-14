@@ -3,13 +3,18 @@
     "type": "library",
     "description": "A PHP library for accessing the MusicBrainz API",
     "keywords": ["musicbrainz", "library", "php", "api"],
-    "homepage": "https://github.com/mikealmond/musicbrainz",
+    "homepage": "https://github.com/simonfranz/musicbrainz",
     "license": "MIT",
     "authors": [
         {
             "name": "Mike Almond",
             "email": "mike.almond@gmail.com",
             "homepage": "http://mikealmond.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Simon Franz",
+            "email": "simonfranz85@gmail.com",
             "role": "Developer"
         }
     ],
