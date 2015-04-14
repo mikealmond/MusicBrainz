@@ -118,12 +118,11 @@ class Recording
     }
 
 	/**
-     * @return Artist
+     * @return Array
      */
-	 public function getArtistWithoutRequest()
+	 public function getData()
     {
-        $artist = $this->data['artist-credit'][0];
-        return new Artist($artist, $this->brainz);
+        return $this->data
     }
 
     /**
