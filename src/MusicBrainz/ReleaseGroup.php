@@ -13,6 +13,14 @@ class ReleaseGroup
      */
     public $id;
     /**
+     * @var string
+     */
+    public $primaryType;
+    /**
+     * @var array
+     */
+    public $secondaryTypes = array();
+    /**
      * @var array
      */
     private $data;
@@ -34,7 +42,9 @@ class ReleaseGroup
         $this->data   = $releaseGroup;
         $this->brainz = $brainz;
 
-        $this->id = isset($releaseGroup['id']) ? (string)$releaseGroup['id'] : '';
+        $this->id             = isset($releaseGroup['id']) ? (string)$releaseGroup['id'] : '';
+        $this->primaryType    = isset($releaseGroup['primary-type']) ? (string)$releaseGroup['primary-type'] : '';
+        $this->secondaryTypes = isset($releaseGroup['secondary-types']) ? $releaseGroup['secondary-types'] : array();
     }
 
     /**

@@ -49,6 +49,10 @@ class Release
      */
     public $artists = array();
     /**
+     * @var ReleaseGroup
+     */
+    public $releaseGroup;
+    /**
      * @var
      */
     protected $releaseDate;
@@ -75,6 +79,10 @@ class Release
         $this->date     = isset($release['date']) ? (string)$release['date'] : '';
         $this->country  = isset($release['country']) ? (string)$release['country'] : '';
         $this->barcode  = isset($release['barcode']) ? (string)$release['barcode'] : '';
+
+        if (isset($release['release-group'])) {
+            $this->setReleaseGroup(new ReleaseGroup($release['release-group'], $this->brainz));
+        }
     }
 
     /**
@@ -83,6 +91,18 @@ class Release
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param ReleaseGroup $releaseGroup
+     *
+     * @return $this
+     */
+    public function setReleaseGroup(ReleaseGroup $releaseGroup)
+    {
+        $this->releaseGroup = $releaseGroup;
+
+        return $this;
     }
 
     /**
