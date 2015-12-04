@@ -21,6 +21,10 @@ class Recording
      */
     public $score;
     /**
+     * @var Artist[]
+     */
+    public $artists = array();
+    /**
      * @var Release[]
      */
     public $releases = array();
@@ -42,7 +46,10 @@ class Recording
         $this->title    = (string)$recording['title'];
         $this->length   = (isset($recording['length'])) ? (int)$recording['length'] : 0;
         $this->score    = (isset($recording['score'])) ? (int)$recording['score'] : 0;
-        $this->artistID = $recording['artist-credit'][0]['artist']['id'];
+
+        if (isset($recording['artist-credit'])) {
+            $this->setArtists($recording['artist-credit']);
+        }
 
         if (isset($recording['releases'])) {
             $this->setReleases($recording['releases']);
@@ -103,20 +110,41 @@ class Recording
     }
 
     /**
+     * @param array $artists
+     *
+     * @return $this
+     */
+    public function setArtists(array $artists)
+    {
+        foreach ($artists as $artist) {
+            array_push($this->artists, new Artist($artist["artist"], $this->brainz));
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Artist
      */
     public function getArtist()
     {
-        $includes = array(
-            'releases',
-            'recordings',
-            'release-groups',
-            'user-ratings'
-        );
+        return ($this->getArtists()?$this->getArtists()[0]:null);
+    }
 
-        $artist = $this->brainz->lookup('artist', $this->artistID, $includes);
+    /**
+     * @return Artist[]
+     */
+    public function getArtists()
+    {
+        if (!$this->artists) {
+            $includes = array(
+                'artists',
+            );
 
-        return new Artist($artist, $this->brainz);
+            $release = $this->brainz->lookup('release', $this->getId(), $includes);
+            $this->setArtists($release['artist-credit']);
+        }
+        return $this->artists;
     }
 
     /**
