@@ -123,6 +123,9 @@ class Release
         if (!isset($this->data['date']) && isset($this->data['release-events'])) {
             return $this->getReleaseEventDates($this->data['release-events']);
         } elseif (isset($this->data['date'])) {
+            if (preg_match("/^\d{4}$/", $this->data['date'])) {
+                return \DateTime::createFromFormat('Y', $this->data['date']);
+            }
             return new \DateTime($this->data['date']);
         }
 
