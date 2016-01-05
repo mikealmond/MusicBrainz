@@ -121,5 +121,24 @@ class Artist
     {
         return $this->id;
     }
+
+    /**
+     * @param $key
+     * @param null $default
+     *
+     * @return mixed|null
+     */
+    public function get($key, $default = null)
+    {
+        return !isset($this->data[$key]) ? $default : $this->data[$key];
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 }
 
