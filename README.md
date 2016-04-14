@@ -40,6 +40,11 @@ Look in the [/examples](https://github.com/mikealmond/MusicBrainz/tree/master/ex
 ## Requirements
 PHP5 and [cURL extension](http://php.net/manual/en/book.curl.php).
 
+## TODO
+* Update `GuzzleHttpAdapter`to make it compatible with a more recent version of Guzzle (~5.0|~6.0)
+  * Or create a new Adapter for BC
+* Prepare compatibility with PHP7
+* Update composer
 
 ## License
 

@@ -2,7 +2,7 @@
 
 namespace MusicBrainz\Tests;
 
-use MusicBrainz\HttpAdapters\GuzzleHttpAdapter;
+use MusicBrainz\HttpAdapters\GuzzleFiveAdapter;
 use MusicBrainz\MusicBrainz;
 
 /**
@@ -18,7 +18,7 @@ class MusicBrainzTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         /** @noinspection PhpParamsInspection */
-        $this->brainz = new MusicBrainz(new GuzzleHttpAdapter($this->getMock('\Guzzle\Http\ClientInterface')));
+        $this->brainz = new MusicBrainz(new GuzzleFiveAdapter($this->getMock('\GuzzleHttp\ClientInterface')));
     }
 
     /**
