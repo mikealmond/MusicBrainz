@@ -16,7 +16,7 @@ class RequestsHttpAdapter extends AbstractHttpAdapter
      *
      * @param null $endpoint Override the default endpoint (useful for local development)
      */
-    public function __construct($endpoint = null)
+    public function __construct($endpoint = NULL)
     {
         if (filter_var($endpoint, FILTER_VALIDATE_URL)) {
             $this->endpoint = $endpoint;
@@ -35,7 +35,7 @@ class RequestsHttpAdapter extends AbstractHttpAdapter
      * @throws \MusicBrainz\Exception
      * @return array
      */
-    public function call($path, array $params = array(), array $options = array(), $isAuthRequired = false, $returnArray = false)
+    public function call($path, array $params = array(), array $options = array(), $isAuthRequired = FALSE, $returnArray = FALSE)
     {
         if ($options['user-agent'] == '') {
             throw new Exception('You must set a valid User Agent before accessing the MusicBrainz API');
@@ -55,7 +55,7 @@ class RequestsHttpAdapter extends AbstractHttpAdapter
 
         $requestOptions = array();
         if ($isAuthRequired) {
-            if ($options['user'] != null && $options['password'] != null) {
+            if ($options['user'] != NULL && $options['password'] != NULL) {
                 $requestOptions['auth'] = array($options['user'], $options['password']);
             } else {
                 throw new Exception('Authentication is required');

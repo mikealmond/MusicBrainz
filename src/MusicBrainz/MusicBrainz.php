@@ -267,13 +267,13 @@ class MusicBrainz
      *
      * @var string
      */
-    private $user = null;
+    private $user = NULL;
     /**
      * The password of a MusicBrainz user. Used for authentication.
      *
      * @var string
      */
-    private $password = null;
+    private $password = NULL;
     /**
      * The Http adapter used to make requests
      *
@@ -289,15 +289,15 @@ class MusicBrainz
      * @param string                           $user
      * @param string                           $password
      */
-    public function __construct(AbstractHttpAdapter $adapter, $user = null, $password = null)
+    public function __construct(AbstractHttpAdapter $adapter, $user = NULL, $password = NULL)
     {
         $this->adapter = $adapter;
 
-        if (null != $user) {
+        if (NULL !== $user) {
             $this->setUser($user);
         }
 
-        if (null != $password) {
+        if (NULL !== $password) {
             $this->setPassword($password);
         }
     }
@@ -354,7 +354,7 @@ class MusicBrainz
         $mbid,
         array $includes,
         $limit = 25,
-        $offset = null,
+        $offset = NULL,
         $releaseType = array(),
         $releaseStatus = array()
     ) {
@@ -394,7 +394,7 @@ class MusicBrainz
      * @return array
      * @throws Exception
      */
-    public function browseArtist($entity, $mbid, array $includes = array(), $limit = 25, $offset = null)
+    public function browseArtist($entity, $mbid, array $includes = array(), $limit = 25, $offset = NULL)
     {
         if (!in_array($entity, array('recording', 'release', 'release-group'))) {
             throw new Exception('Invalid browse entity for artist');
@@ -413,7 +413,7 @@ class MusicBrainz
      * @return array
      * @throws Exception
      */
-    public function browseLabel($entity, $mbid, array $includes, $limit = 25, $offset = null)
+    public function browseLabel($entity, $mbid, array $includes, $limit = 25, $offset = NULL)
     {
         if (!in_array($entity, array('release'))) {
             throw new Exception('Invalid browse entity for label');
@@ -432,7 +432,7 @@ class MusicBrainz
      * @return array
      * @throws Exception
      */
-    public function browseRecording($entity, $mbid, array $includes = array(), $limit = 25, $offset = null)
+    public function browseRecording($entity, $mbid, array $includes = array(), $limit = 25, $offset = NULL)
     {
         if (!in_array($entity, array('artist', 'release'))) {
             throw new Exception('Invalid browse entity for recording');
@@ -442,8 +442,8 @@ class MusicBrainz
     }
 
     /**
-     * @param       $entity
-     * @param       $mbid
+     * @param       string $entity
+     * @param       string $mbid
      * @param array $includes
      * @param int   $limit
      * @param null  $offset
@@ -458,7 +458,7 @@ class MusicBrainz
         $mbid,
         array $includes = array(),
         $limit = 25,
-        $offset = null,
+        $offset = NULL,
         $releaseType = array(),
         $releaseStatus = array()
     ) {
@@ -493,7 +493,7 @@ class MusicBrainz
         $entity,
         $mbid,
         $limit = 25,
-        $offset = null,
+        $offset = NULL,
         array $includes,
         $releaseType = array()
     ) {
@@ -530,7 +530,7 @@ class MusicBrainz
      * @throws Exception
      * @return array
      */
-    public function search(Filters\FilterInterface $filter, $limit = 25, $offset = null)
+    public function search(Filters\FilterInterface $filter, $limit = 25, $offset = NULL)
     {
         if (count($filter->createParameters()) < 1) {
             throw new Exception('The artist filter object needs at least 1 argument to create a query.');
@@ -542,7 +542,7 @@ class MusicBrainz
 
         $params = $filter->createParameters(array('limit' => $limit, 'offset' => $offset, 'fmt' => 'json'));
 
-        $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), false, true);
+        $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), FALSE, TRUE);
 
         return $filter->parseResponse($response, $this);
     }
@@ -560,7 +560,7 @@ class MusicBrainz
     /**
      * Check the list of allowed entities
      *
-     * @param $entity
+     * @param string $entity
      *
      * @return bool
      */
@@ -572,7 +572,7 @@ class MusicBrainz
     /**
      * Some calls require authentication
      *
-     * @param $entity
+     * @param string $entity
      * @param $includes
      *
      * @return bool
@@ -580,14 +580,14 @@ class MusicBrainz
     protected function isAuthRequired($entity, $includes)
     {
         if (in_array('user-tags', $includes) || in_array('user-ratings', $includes)) {
-            return true;
+            return TRUE;
         }
 
         if (substr($entity, 0, strlen('collection')) === 'collection') {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -605,7 +605,7 @@ class MusicBrainz
             }
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -623,7 +623,7 @@ class MusicBrainz
             }
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -644,7 +644,6 @@ class MusicBrainz
         array $releaseType = array(),
         array $releaseStatus = array()
     ) {
-        //$this->validateFilter(array($entity), self::$validIncludes);
         $this->validateFilter($releaseStatus, self::$validReleaseStatuses);
         $this->validateFilter($releaseType, self::$validReleaseTypes);
 
@@ -709,7 +708,7 @@ class MusicBrainz
      */
     public function setUserAgent($application, $version, $contactInfo)
     {
-        if (strpos($version, '-') !== false) {
+        if (strpos($version, '-') !== FALSE) {
             throw new Exception('User agent: version should not contain a "-" character.');
         }
 
@@ -719,7 +718,7 @@ class MusicBrainz
     /**
      * Returns the MusicBrainz user
      *
-     * @return null|string
+     * @return string
      */
     public function getUser()
     {
@@ -739,7 +738,7 @@ class MusicBrainz
     /**
      * Returns the user’s password
      *
-     * @return null|string
+     * @return string
      */
     public function getPassword()
     {

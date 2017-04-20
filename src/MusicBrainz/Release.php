@@ -91,7 +91,7 @@ class Release
      */
     public function getReleaseDate()
     {
-        if (null != $this->releaseDate) {
+        if (NULL != $this->releaseDate) {
             return $this->releaseDate;
         }
 
@@ -108,7 +108,7 @@ class Release
     /**
      * @param array $releaseEvents
      *
-     * @return array
+     * @return \DateTime
      */
     public function getReleaseEventDates(array $releaseEvents)
     {

@@ -23,7 +23,7 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
      * @param \Guzzle\Http\ClientInterface $client The Guzzle client used to make requests
      * @param null                         $endpoint Override the default endpoint (useful for local development)
      */
-    public function __construct(ClientInterface $client, $endpoint = null)
+    public function __construct(ClientInterface $client, $endpoint = NULL)
     {
         $this->client = $client;
 
@@ -44,7 +44,7 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
      * @throws \MusicBrainz\Exception
      * @return array
      */
-    public function call($path, array $params = array(), array $options = array(), $isAuthRequired = false, $returnArray = false)
+    public function call($path, array $params = array(), array $options = array(), $isAuthRequired = FALSE, $returnArray = FALSE)
     {
         if ($options['user-agent'] == '') {
             throw new Exception('You must set a valid User Agent before accessing the MusicBrainz API');
@@ -62,14 +62,14 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
         $request->setHeader('User-Agent', $options['user-agent']);
 
         if ($isAuthRequired) {
-            if ($options['user'] != null && $options['password'] != null) {
+            if ($options['user'] != NULL && $options['password'] != NULL) {
                 $request->setAuth($options['user'], $options['password'], CURLAUTH_DIGEST);
             } else {
                 throw new Exception('Authentication is required');
             }
         }
 
-        $request->getQuery()->useUrlEncoding(false);
+        $request->getQuery()->useUrlEncoding(FALSE);
 
         // musicbrainz throttle
         sleep(1);

@@ -74,8 +74,8 @@ class Artist
         $this->sortName  = isset($artist['sort-name']) ? (string)$artist['sort-name'] : '';
         $this->gender    = isset($artist['gender']) ? (string)$artist['gender'] : '';
         $this->country   = isset($artist['country']) ? (string)$artist['country'] : '';
-        $this->beginDate = isset($artist['life-span']['begin']) ? $artist['life-span']['begin'] : null;
-        $this->endDate   = isset($artist['life-span']['ended']) ? $artist['life-span']['ended'] : null;
+        $this->beginDate = isset($artist['life-span']['begin']) ? $artist['life-span']['begin'] : NULL;
+        $this->endDate   = isset($artist['life-span']['ended']) ? $artist['life-span']['ended'] : NULL;
     }
 
     /**
@@ -107,7 +107,7 @@ class Artist
      */
     public function getReleases()
     {
-        if (null === $this->releases) {
+        if (NULL === $this->releases) {
             $this->releases = $this->brainz->browseRelease('artist', $this->getId());
         }
 

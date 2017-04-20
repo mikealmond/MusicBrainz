@@ -1,30 +1,30 @@
 <pre><?php
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use MusicBrainz\Filters\RecordingFilter;
-use MusicBrainz\HttpAdapters\GuzzleHttpAdapter;
+use MusicBrainz\HttpAdapters\GuzzleFiveAdapter;
 use MusicBrainz\MusicBrainz;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 //Create new MusicBrainz object
-$brainz = new MusicBrainz(new GuzzleHttpAdapter(new Client()));
+$brainz = new MusicBrainz(new GuzzleFiveAdapter(new Client()));
 $brainz->setUserAgent('ApplicationName', '0.2', 'http://example.com');
 
 // set defaults
 $releaseDate    = new DateTime();
-$artistId       = null;
-$songId         = null;
+$artistId       = NULL;
+$songId         = NULL;
 $trackLen       = -1;
 $albumName      = '';
-$lastScore      = null;
+$lastScore      = NULL;
 $firstRecording = array(
-    'release'     => null,
+    'release'     => NULL,
     'releaseDate' => new DateTime(),
-    'recording'   => null,
-    'artistId'    => null,
-    'recordingId' => null,
-    'trackLength' => null
+    'recording'   => NULL,
+    'artistId'    => NULL,
+    'recordingId' => NULL,
+    'trackLength' => NULL
 );
 
 // Set the search arguments to pass into the RecordingFilter
@@ -43,7 +43,7 @@ try {
 
         // if the recording has a lower score than the previous recording, stop the loop.
         // This is because scores less than 100 usually don't match the search well
-        if (null != $lastScore && $recording->getScore() < $lastScore) {
+        if (NULL != $lastScore && $recording->getScore() < $lastScore) {
             break;
         }
 
@@ -67,6 +67,7 @@ try {
     }
 
     var_dump(array($firstRecording));
-} catch (Exception $e) {
+}
+catch (Exception $e) {
     print ($e->getMessage());
 }
