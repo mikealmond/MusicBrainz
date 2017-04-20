@@ -20,8 +20,9 @@
         }
     ],
     "require-dev": {
-        "guzzlehttp/guzzle": "~5.3",
-        "phpunit/phpunit": "^5.3"
+        "guzzlehttp/guzzle": "^3.0|^5.3|^6.0",
+        "phpunit/phpunit": "^5.3",
+        "satooshi/php-coveralls": "^1.0"
     },
     "replace": {
         "mikealmond/musicbrainz" : "~0.2"
@@ -34,5 +35,8 @@
         "psr-0": {
             "MusicBrainz": "src/"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }

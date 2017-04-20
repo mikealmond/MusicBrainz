@@ -66,7 +66,7 @@ examples in your browser: http://localhost/phpbrainz/examples/browse.php
 ?>
 ```
 
-**With Guzzle3**
+**With Guzzle3 (deprecated)**
 
 ```php
 <?php

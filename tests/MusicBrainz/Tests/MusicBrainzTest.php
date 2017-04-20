@@ -18,7 +18,7 @@ class MusicBrainzTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         /** @noinspection PhpParamsInspection */
-        $this->brainz = new MusicBrainz(new GuzzleFiveAdapter($this->getMock('\GuzzleHttp\ClientInterface')));
+        $this->brainz = new MusicBrainz(new GuzzleFiveAdapter($this->createMock('\GuzzleHttp\ClientInterface')));
     }
 
     /**
