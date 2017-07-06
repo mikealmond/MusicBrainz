@@ -50,12 +50,15 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
             throw new Exception('You must set a valid User Agent before accessing the MusicBrainz API');
         }
 
+        // We build the query ourselves because Guzzle url-encodes it
+        $queryString = urldecode(http_build_query($params, '', '&', PHP_QUERY_RFC1738));
+
         $requestOptions = [
             "headers" => [
                 'Accept' => 'application/json',
                 'User-Agent' => $options['user-agent']
             ],
-            "query" => $params
+            "query" => $queryString
         ];
 
         if ($isAuthRequired) {
