@@ -11,21 +11,27 @@
             "email": "mike.almond@gmail.com",
             "homepage": "http://mikealmond.com",
             "role": "Developer"
+        },
+        {
+            "name": "Arnaud de Mouhy",
+            "email": "arnaud.demouhy@akerbis.com",
+            "homepage": "https://www.akerbis.com",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": ">=5.3.8"
+        "php": ">=5.5",
     },
     "require-dev": {
-        "guzzle/guzzle": "~3.8.0",
-        "phpunit/phpunit": "3.7.*"
-    },
-    "suggest": {
-        "guzzle/guzzle": "Allows you to use the GuzzleHttpAdapter. You must install one of the supported adapters.",
-        "rmccue/requests": "Allows you to use the RequestsHttpAdapter. You must install one of the supported adapters."
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
-        "psr-4": {
+    "suggest": {
+        "guzzlehttp/guzzle": "Allows you to use the GuzzleHttpAdapter. You must install one of the supported adapters.",
+        "rmccue/requests": "Allows you to use the RequestsHttpAdapter. You must install one of the supported adapters."
+    },
+    "psr-4": {
             "MusicBrainz\\": "src/",
             "MusicBrainz\\Tests\\": "tests/"
         }
