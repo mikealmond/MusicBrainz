@@ -104,9 +104,9 @@ class Release
      */
     public function setReleaseGroup(ReleaseGroup $releaseGroup)
     {
-       $this->releaseGroup = $releaseGroup;
+        $this->releaseGroup = $releaseGroup;
 
-       return $this;
+        return $this;
     }
 
     /**
