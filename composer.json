@@ -20,18 +20,18 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
+        "php": ">=5.5"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3",
         "phpunit/phpunit": "^5.7"
     },
-    "autoload": {
     "suggest": {
         "guzzlehttp/guzzle": "Allows you to use the GuzzleHttpAdapter. You must install one of the supported adapters.",
         "rmccue/requests": "Allows you to use the RequestsHttpAdapter. You must install one of the supported adapters."
     },
-    "psr-4": {
+    "autoload": {
+        "psr-4": {
             "MusicBrainz\\": "src/",
             "MusicBrainz\\Tests\\": "tests/"
         }
