@@ -49,6 +49,10 @@ class Release
      */
     public $artists = array();
     /**
+     * @var ReleaseGroup
+     */
+    public $releaseGroup;
+    /**
      * @var
      */
     protected $releaseDate;
@@ -75,6 +79,14 @@ class Release
         $this->date     = isset($release['date']) ? (string)$release['date'] : '';
         $this->country  = isset($release['country']) ? (string)$release['country'] : '';
         $this->barcode  = isset($release['barcode']) ? (string)$release['barcode'] : '';
+
+        if (isset($recording['artist-credit'])) {
+            $this->setArtists($recording['artist-credit']);
+        }
+
+        if (isset($release['release-group'])) {
+            $this->setReleaseGroup(new ReleaseGroup($release['release-group'], $this->brainz));
+        }
     }
 
     /**
@@ -83,6 +95,18 @@ class Release
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param ReleaseGroup $releaseGroup
+     *
+     * @return $this
+     */
+    public function setReleaseGroup(ReleaseGroup $releaseGroup)
+    {
+        $this->releaseGroup = $releaseGroup;
+
+        return $this;
     }
 
     /**
@@ -99,6 +123,9 @@ class Release
         if (!isset($this->data['date']) && isset($this->data['release-events'])) {
             return $this->getReleaseEventDates($this->data['release-events']);
         } elseif (isset($this->data['date'])) {
+            if (preg_match("/^\d{4}$/", $this->data['date'])) {
+                return \DateTime::createFromFormat('Y', $this->data['date']);
+            }
             return new \DateTime($this->data['date']);
         }
 
@@ -126,5 +153,51 @@ class Release
         }
 
         return $releaseDate;
+    }
+
+    /**
+     * @param array $artists
+     *
+     * @return $this
+     */
+    public function setArtists(array $artists)
+    {
+        foreach ($artists as $artist) {
+            array_push($this->artists, new Artist($artist["artist"], $this->brainz));
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Artist
+     */
+    public function getArtist()
+    {
+        if (!$this->artists) {
+            $includes = array(
+                'artists',
+            );
+
+            $release = $this->brainz->lookup('release', $this->getId(), $includes);
+            $this->setArtists(array($release['artist-credit']));
+        }
+        return ($this->artists?$this->artists[0]:null);
+    }
+
+    /**
+     * @return Artist[]
+     */
+    public function getArtists()
+    {
+        if (!$this->artists) {
+            $includes = array(
+                'artists',
+            );
+
+            $release = $this->brainz->lookup('release', $this->getId(), $includes);
+            $this->setArtists($release['artist-credit']);
+        }
+        return $this->artists;
     }
 }

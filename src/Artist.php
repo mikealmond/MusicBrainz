@@ -79,6 +79,14 @@ class Artist
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->getName();
+    }
+
+    /**
      * @return mixed
      */
     public function getName()
@@ -122,4 +130,3 @@ class Artist
         return $this->id;
     }
 }
-

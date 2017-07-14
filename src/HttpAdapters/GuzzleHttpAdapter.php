@@ -2,7 +2,8 @@
 
 namespace MusicBrainz\HttpAdapters;
 
-use Guzzle\Http\ClientInterface;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Request;
 use MusicBrainz\Exception;
 
 /**
@@ -13,14 +14,14 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
     /**
      * The Guzzle client used to make cURL requests
      *
-     * @var \Guzzle\Http\ClientInterface
+     * @var \GuzzleHttp\ClientInterface
      */
     private $client;
 
     /**
      * Initializes the class.
      *
-     * @param \Guzzle\Http\ClientInterface $client The Guzzle client used to make requests
+     * @param \GuzzleHttp\ClientInterface $client The Guzzle client used to make requests
      * @param null                         $endpoint Override the default endpoint (useful for local development)
      */
     public function __construct(ClientInterface $client, $endpoint = null)
@@ -50,30 +51,30 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
             throw new Exception('You must set a valid User Agent before accessing the MusicBrainz API');
         }
 
-        $this->client->setBaseUrl($this->endpoint);
-        $this->client->setConfig(
-            array(
-                'data' => $params
-            )
-        );
+        // We build the query ourselves because Guzzle url-encodes it
+        $queryString = urldecode(http_build_query($params, '', '&', PHP_QUERY_RFC1738));
 
-        $request = $this->client->get($path . '{?data*}');
-        $request->setHeader('Accept', 'application/json');
-        $request->setHeader('User-Agent', $options['user-agent']);
+        $requestOptions = [
+            "headers" => [
+                'Accept' => 'application/json',
+                'User-Agent' => $options['user-agent']
+            ],
+            "query" => $queryString
+        ];
 
         if ($isAuthRequired) {
             if ($options['user'] != null && $options['password'] != null) {
-                $request->setAuth($options['user'], $options['password'], CURLAUTH_DIGEST);
+                $requestOptions["auth"] = [$options['user'], $options['password']];
             } else {
                 throw new Exception('Authentication is required');
             }
         }
 
-        $request->getQuery()->useUrlEncoding(false);
-
         // musicbrainz throttle
         sleep(1);
 
-        return $request->send()->json();
+        $response = $this->client->request($options["method"], $this->endpoint."/".$path, $requestOptions);
+
+        return json_decode($response->getBody(), true);
     }
 }
