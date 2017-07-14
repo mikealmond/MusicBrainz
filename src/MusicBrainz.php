@@ -542,7 +542,7 @@ class MusicBrainz
 
         $params = $filter->createParameters(array('limit' => $limit, 'offset' => $offset, 'fmt' => 'json'));
 
-        $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions());
+        $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), false, true);
 
         return $filter->parseResponse($response, $this);
     }
