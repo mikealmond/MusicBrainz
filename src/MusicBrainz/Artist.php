@@ -121,5 +121,14 @@ class Artist
     {
         return $this->id;
     }
+    
+    /**
+     * Get artist data
+     *
+     * @return array
+     */
+    public function getData() {
+        return $this->data;
+    }
 }
 
