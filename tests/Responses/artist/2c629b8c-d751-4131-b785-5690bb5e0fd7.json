@@ -1,0 +1,49 @@
+{
+  "id": "2c629b8c-d751-4131-b785-5690bb5e0fd7",
+  "type": "Group",
+  "disambiguation": "",
+  "end_area": null,
+  "life-span": {
+    "end": null,
+    "begin": "2000",
+    "ended": false
+  },
+  "country": "GB",
+  "name": "The Kills",
+  "end-area": null,
+  "begin_area": {
+    "type": null,
+    "disambiguation": "",
+    "sort-name": "London",
+    "id": "f03d09b3-39dc-4083-afd6-159e3f0d462f",
+    "name": "London",
+    "type-id": null
+  },
+  "gender": null,
+  "sort-name": "Kills, The",
+  "isnis": [
+    "0000000119453710"
+  ],
+  "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+  "area": {
+    "iso-3166-1-codes": [
+      "GB"
+    ],
+    "type-id": null,
+    "name": "United Kingdom",
+    "sort-name": "United Kingdom",
+    "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+    "disambiguation": "",
+    "type": null
+  },
+  "gender-id": null,
+  "begin-area": {
+    "type": null,
+    "disambiguation": "",
+    "sort-name": "London",
+    "id": "f03d09b3-39dc-4083-afd6-159e3f0d462f",
+    "name": "London",
+    "type-id": null
+  },
+  "ipis": []
+}
