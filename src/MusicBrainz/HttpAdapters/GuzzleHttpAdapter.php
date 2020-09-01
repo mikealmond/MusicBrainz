@@ -50,33 +50,32 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
             throw new Exception('You must set a valid User Agent before accessing the MusicBrainz API');
         }
 
-        $this->client->setBaseUrl($this->endpoint);
-        $this->client->setConfig(
-            array_merge(
-                $this->client->getConfig()->toArray(),
-                array(
-                    'data' => $params
-                )
-            )
-        );
-
-        $request = $this->client->get($path . '{?data*}');
-        $request->setHeader('Accept', 'application/json');
-        $request->setHeader('User-Agent', $options['user-agent']);
+        $requestOptions = [
+            'headers' => [
+                'Accept' => 'application/json',
+                'User-Agent' => $options['user-agent']
+            ],
+            'data' => $params
+        ];
 
         if ($isAuthRequired) {
             if ($options['user'] != null && $options['password'] != null) {
-                $request->setAuth($options['user'], $options['password'], CURLAUTH_DIGEST);
+                $requestOptions['auth'] = [
+                    'user' => $options['user'],
+                    'pass' => $options['password']
+                ];
             } else {
                 throw new Exception('Authentication is required');
             }
         }
 
-        $request->getQuery()->useUrlEncoding(false);
+        $response = $this->client->request('GET', $this->endpoint.'/'.$path, $requestOptions);
+
+        $body = $response->getBody()->getContents();
 
         // musicbrainz throttle
         sleep(1);
 
-        return $request->send()->json();
+        return \GuzzleHttp\json_decode($body, true);
     }
 }
