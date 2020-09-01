@@ -1,6 +1,6 @@
 <pre><?php
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use MusicBrainz\Filters\ArtistFilter;
 use MusicBrainz\Filters\LabelFilter;
 use MusicBrainz\Filters\RecordingFilter;

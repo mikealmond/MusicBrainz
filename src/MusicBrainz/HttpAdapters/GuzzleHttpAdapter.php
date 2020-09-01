@@ -2,7 +2,7 @@
 
 namespace MusicBrainz\HttpAdapters;
 
-use Guzzle\Http\ClientInterface;
+use GuzzleHttp\ClientInterface;
 use MusicBrainz\Exception;
 
 /**
@@ -13,14 +13,14 @@ class GuzzleHttpAdapter extends AbstractHttpAdapter
     /**
      * The Guzzle client used to make cURL requests
      *
-     * @var \Guzzle\Http\ClientInterface
+     * @var \GuzzleHttp\ClientInterface
      */
     private $client;
 
     /**
      * Initializes the class.
      *
-     * @param \Guzzle\Http\ClientInterface $client The Guzzle client used to make requests
+     * @param \GuzzleHttp\ClientInterface $client The Guzzle client used to make requests
      * @param null                         $endpoint Override the default endpoint (useful for local development)
      */
     public function __construct(ClientInterface $client, $endpoint = null)

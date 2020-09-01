@@ -9,7 +9,7 @@ This project is a fork of https://github.com/chrisdawson/MusicBrainz and takes s
 
 ```php
 <?php
-    use Guzzle\Http\Client;
+    use GuzzleHttp\Client;
     use MusicBrainz\Filters\ArtistFilter;
     use MusicBrainz\Filters\RecordingFilter;
     use MusicBrainz\HttpAdapters\GuzzleHttpAdapter;
