@@ -1,15 +1,21 @@
 {
-    "name": "mikealmond/musicbrainz",
+    "name": "iainmullan/musicbrainz-php",
     "type": "library",
-    "description": "A PHP library for accessing the MusicBrainz API",
+    "description": "A PHP 7 library for accessing the MusicBrainz API",
     "keywords": ["musicbrainz", "library", "php", "api"],
-    "homepage": "https://github.com/mikealmond/musicbrainz",
+    "homepage": "https://github.com/iainmullan/MusicBrainz",
     "license": "MIT",
     "authors": [
         {
             "name": "Mike Almond",
             "email": "mike.almond@gmail.com",
             "homepage": "http://mikealmond.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Iain Mullan",
+            "email": "iain.mullan@gmail.com",
+            "homepage": "https://iainmullan.com",
             "role": "Developer"
         }
     ],
@@ -27,11 +33,6 @@
     "autoload": {
         "psr-0": {
             "MusicBrainz": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-iain": "feature/guzzle-upgrade"
         }
     }
 }
