@@ -14,11 +14,11 @@
         }
     ],
     "require": {
-        "php": ">=5.3.8"
+        "php": "^7.1",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
-        "guzzle/guzzle": "~3.8.0",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "^9.3"
     },
     "suggest": {
         "guzzle/guzzle": "Allows you to use the GuzzleHttpAdapter. You must install one of the supported adapters.",
