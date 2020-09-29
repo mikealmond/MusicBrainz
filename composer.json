@@ -1,9 +1,9 @@
 {
-    "name": "mikealmond/musicbrainz",
+    "name": "dehy/musicbrainz",
     "type": "library",
     "description": "A PHP library for accessing the MusicBrainz API",
     "keywords": ["musicbrainz", "library", "php", "api"],
-    "homepage": "https://github.com/mikealmond/musicbrainz",
+    "homepage": "https://github.com/dehy/musicbrainz",
     "license": "MIT",
     "authors": [
         {
@@ -14,8 +14,7 @@
         },
         {
             "name": "Arnaud de Mouhy",
-            "email": "arnaud.demouhy@akerbis.com",
-            "homepage": "https://www.akerbis.com",
+            "email": "arnaud@admds.net",
             "role": "Developer"
         }
     ],
