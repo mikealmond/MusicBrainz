@@ -8,14 +8,14 @@ use MusicBrainz\MusicBrainz;
 /**
  * @covers MusicBrainz\MusicBrainz
  */
-class MusicBrainzTest extends \PHPUnit_Framework_TestCase
+class MusicBrainzTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \MusicBrainz\MusicBrainz
      */
     protected $brainz;
 
-    public function setUp()
+    public function setUp(): void
     {
         /** @noinspection PhpParamsInspection */
         $this->brainz = new MusicBrainz(new GuzzleHttpAdapter($this->createMock('\GuzzleHttp\ClientInterface')));
