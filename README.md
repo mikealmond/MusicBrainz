@@ -2,7 +2,7 @@
 
 This PHP library that allows you to easily access the MusicBrainz Web Service V2 API. Visit the [MusicBrainz development page](http://musicbrainz.org/doc/Development) for more information.
 
-This project is a fork of https://github.com/chrisdawson/MusicBrainz and takes some inspiration from the [Python bindings](https://github.com/alastair/python-musicbrainz-ngs)
+This project is a fork of https://github.com/mikealmond/MusicBrainz
 
 ## Usage Example
 
@@ -35,10 +35,10 @@ This project is a fork of https://github.com/chrisdawson/MusicBrainz and takes s
 ?>
 ```
 
-Look in the [/examples](https://github.com/mikealmond/MusicBrainz/tree/master/examples) folder for more.
+Look in the [/examples](https://github.com/dehy/MusicBrainz/tree/master/examples) folder for more.
 
 ## Requirements
-PHP5 and [cURL extension](http://php.net/manual/en/book.curl.php).
+PHP 7.2 and [cURL extension](http://php.net/manual/en/book.curl.php).
 
 
 ## License
@@ -47,6 +47,7 @@ PHP5 and [cURL extension](http://php.net/manual/en/book.curl.php).
 
 **MIT License**
 
+Copyright © 2020 Arnaud de Mouhy
 Copyright © 2015 Mike Almond
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
