@@ -119,6 +119,14 @@ class Recording
         return new Artist($artist, $this->brainz);
     }
 
+	/**
+     * @return Array
+     */
+	 public function getData()
+    {
+        return $this->data;
+    }
+
     /**
      * @param string $format
      *
