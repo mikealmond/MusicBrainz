@@ -65,6 +65,7 @@ class MusicBrainz
             "discids",
             "media",
             "artist-credits",
+            "isrcs", // add missing International Standard Recording Code
             "tags",
             "user-tags",
             "ratings",
@@ -178,7 +179,8 @@ class MusicBrainz
             "isrcs"
         ),
         'iswc'          => array(
-            "artists"
+            "artists",
+            "collection" // add missing entity collection
         ),
         'collection'    => array(
             'releases'
@@ -204,6 +206,10 @@ class MusicBrainz
             "work-rels"
         ),
         'recording'     => array(
+            "artist", // add missing
+            "collection", // add missing
+            "release", // add missing
+            "work", // add missing
             "artist-credits",
             "tags",
             "ratings",
@@ -316,7 +322,6 @@ class MusicBrainz
      */
     public function lookup($entity, $mbid, array $includes = array())
     {
-
         if (!$this->isValidEntity($entity)) {
             throw new Exception('Invalid entity');
         }
