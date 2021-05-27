@@ -46,7 +46,7 @@ abstract class AbstractFilter
      */
     public function createParameters(array $params = array())
     {
-        $params = $params + array('query' => '');
+        $params = array('query' => '') + $params;
 
         if (empty($this->validArgs) || $params['query'] != '') {
             return $params;
