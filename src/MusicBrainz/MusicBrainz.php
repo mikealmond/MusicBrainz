@@ -531,11 +531,12 @@ class MusicBrainz
      * @param Filters\FilterInterface $filter
      * @param int                     $limit
      * @param null|int                $offset
+     * @param boolean                 $parseResponse parse the results array or simply return the result
      *
      * @throws Exception
      * @return array
      */
-    public function search(Filters\FilterInterface $filter, $limit = 25, $offset = null)
+    public function search(Filters\FilterInterface $filter, $limit = 25, $offset = null, $parseResponse = true)
     {
         if (count($filter->createParameters()) < 1) {
             throw new Exception('The artist filter object needs at least 1 argument to create a query.');
@@ -549,7 +550,11 @@ class MusicBrainz
 
         $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), false, true);
 
-        return $filter->parseResponse($response, $this);
+        if ($parseResponse) {
+            return $filter->parseResponse($response, $this);
+        }
+
+        return $response;
     }
 
     /**
