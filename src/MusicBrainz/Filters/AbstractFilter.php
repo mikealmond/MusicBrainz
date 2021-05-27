@@ -54,7 +54,7 @@ abstract class AbstractFilter
 
         foreach ($this->validArgs as $key => $val) {
             if ($params['query'] != '') {
-                $params['query'] .= '+AND+';
+                $params['query'] .= ' AND ';
             }
 
             if (!in_array($key, $this->protectedArgs)) {
