@@ -24,7 +24,7 @@ abstract class AbstractFilter
      * @var array
      */
     protected $protectedArgs = array(
-        'arid'
+        'arid','reid','rgid','tid'
     );
 
     /**
