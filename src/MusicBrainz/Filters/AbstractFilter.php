@@ -54,13 +54,13 @@ abstract class AbstractFilter
 
         foreach ($this->validArgs as $key => $val) {
             if ($params['query'] != '') {
-                $params['query'] .= ' AND ';
+                $params['query'] .= '+AND+';
             }
 
             if (!in_array($key, $this->protectedArgs)) {
                 // Lucene escape characters
                 $val = urlencode(
-                    preg_replace('/([\+\-\!\(\)\{\}\[\]\^\~\*\?\:\\\\])/', '\\\\$1', $val)
+                    preg_replace('/\+|-|&|\||!|\(|\)|\{|\}|\[|\]|\^|"|~|\*|\?|\:|\\|\//', '\\$0', $val)
                 );
             }
             // If the search string contains a space, wrap it in brackets/quotes
