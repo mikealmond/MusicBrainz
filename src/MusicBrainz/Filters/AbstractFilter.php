@@ -24,7 +24,7 @@ abstract class AbstractFilter
      * @var array
      */
     protected $protectedArgs = array(
-        'arid'
+        'arid','reid','rgid','tid'
     );
 
     /**
@@ -46,7 +46,7 @@ abstract class AbstractFilter
      */
     public function createParameters(array $params = array())
     {
-        $params = $params + array('query' => '');
+        $params = array('query' => '') + $params;
 
         if (empty($this->validArgs) || $params['query'] != '') {
             return $params;
@@ -60,14 +60,14 @@ abstract class AbstractFilter
             if (!in_array($key, $this->protectedArgs)) {
                 // Lucene escape characters
                 $val = urlencode(
-                    preg_replace('/([\+\-\!\(\)\{\}\[\]\^\~\*\?\:\\\\])/', '\\\\$1', $val)
+                    preg_replace('/(\\(|\\)|\\{|\\}|\\[|\\]|\\^|"|~|\:|\\\\|\/)/', '\\\$1', $val)
                 );
             }
             // If the search string contains a space, wrap it in brackets/quotes
             // This isn't always wanted, but for the searches required in this
             // library, I'm going to do it.
             if (preg_match('/[\+]/', $val)) {
-                $val = '(' . $val . ')';
+                $val = '"' . $val . '"';
             }
 
             $params['query'] .= $key . ':' . $val;

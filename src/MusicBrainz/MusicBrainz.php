@@ -65,6 +65,7 @@ class MusicBrainz
             "discids",
             "media",
             "artist-credits",
+            "isrcs", // add missing International Standard Recording Code
             "tags",
             "user-tags",
             "ratings",
@@ -178,7 +179,8 @@ class MusicBrainz
             "isrcs"
         ),
         'iswc'          => array(
-            "artists"
+            "artists",
+            "collection" // add missing entity collection
         ),
         'collection'    => array(
             'releases'
@@ -204,6 +206,10 @@ class MusicBrainz
             "work-rels"
         ),
         'recording'     => array(
+            "artist", // add missing
+            "collection", // add missing
+            "release", // add missing
+            "work", // add missing
             "artist-credits",
             "tags",
             "ratings",
@@ -316,7 +322,6 @@ class MusicBrainz
      */
     public function lookup($entity, $mbid, array $includes = array())
     {
-
         if (!$this->isValidEntity($entity)) {
             throw new Exception('Invalid entity');
         }
@@ -526,11 +531,12 @@ class MusicBrainz
      * @param Filters\FilterInterface $filter
      * @param int                     $limit
      * @param null|int                $offset
+     * @param boolean                 $parseResponse parse the results array or simply return the result
      *
      * @throws Exception
      * @return array
      */
-    public function search(Filters\FilterInterface $filter, $limit = 25, $offset = null)
+    public function search(Filters\FilterInterface $filter, $limit = 25, $offset = null, $parseResponse = true)
     {
         if (count($filter->createParameters()) < 1) {
             throw new Exception('The artist filter object needs at least 1 argument to create a query.');
@@ -544,7 +550,11 @@ class MusicBrainz
 
         $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), false, true);
 
-        return $filter->parseResponse($response, $this);
+        if ($parseResponse) {
+            return $filter->parseResponse($response, $this);
+        }
+
+        return $response;
     }
 
     /**

@@ -16,7 +16,7 @@ class LabelFilter extends AbstractFilter implements FilterInterface
      * @var array
      */
     protected $validArgTypes = array(
-        'aliaas',
+        'alias', // fix typo
         'begin',
         'code',
         'comment',
