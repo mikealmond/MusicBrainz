@@ -67,7 +67,7 @@ abstract class AbstractFilter
             // This isn't always wanted, but for the searches required in this
             // library, I'm going to do it.
             if (preg_match('/[\+]/', $val)) {
-                $val = '(' . $val . ')';
+                $val = '"' . $val . '"';
             }
 
             $params['query'] .= $key . ':' . $val;
