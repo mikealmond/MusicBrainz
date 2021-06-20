@@ -45,7 +45,8 @@ class RequestsHttpAdapter extends AbstractHttpAdapter
         $i   = 0;
         foreach ($params as $name => $value) {
             $url .= ($i++ == 0) ? '?' : '&';
-            $url .= urlencode($name) . '=' . urlencode($value);
+            // AbstractFilter already urlencodes the Lucene escaped Query parts, so don't do it twice
+            $url .= $name . '=' . $value;
         }
 
         $headers = array(
